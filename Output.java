@@ -16,7 +16,7 @@ public class input {
     }
 
     public void processData(String data) {
-        if (data = = null) {
+        if (data == null) {
             System.out.println("Error");
         }else{
             String[] parts = data.split(", ");
