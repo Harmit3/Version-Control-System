@@ -1,0 +1,25 @@
+package step2;
+import java.io.*;
+public class newfile {
+// changed the reader implementation
+public void filereader(string path) {
+filereader fr = new filereader(path);
+bufferedreader r = new bufferedreader(fr);
+string line = null;
+while(line = r.readline()) {
+system.out.println("line: "+line);
+}
+fr.close();
+}
+// modified calculation method
+public int calculatesum(int a, int b) {
+return a + b;
+}
+public void printmessage() {
+system.out.println("hello world");
+}
+// new method added
+public void printgreeting(string name) {
+system.out.println("hello " + name);
+}
+}

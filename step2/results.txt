@@ -1,0 +1,53 @@
+=== LINE TRACKING RESULTS (Unix Diff Algorithm) ===
+
+STEP 1: PREPROCESSING
+---------------------
+Old file lines: 21
+New file lines: 25
+
+STEP 2: UNIX DIFF (LCS Algorithm)
+----------------------------------
+Unchanged lines: 14
+Changed/Deleted lines: 7
+Changed/Added lines: 11
+
+UNCHANGED LINES (OldLine -> NewLine):
+--------------------------------------
+1 -> 1: package step2;
+2 -> 2: import java.io.*;
+5 -> 5: public void fileReader(String path) {
+6 -> 6: FileReader fr = new FileReader(path);
+8 -> 8: String line = null;
+10 -> 10: System.out.println("line: "+line);
+11 -> 11: }
+12 -> 13: }
+13 -> 15: public int calculateSum(int a, int b) {
+17 -> 17: }
+18 -> 18: public void printMessage() {
+19 -> 19: System.out.println("Hello World");
+20 -> 24: }
+21 -> 25: }
+
+LEFT LIST (Changed/Deleted Lines):
+-----------------------------------
+Line 3: import LineReader;
+Line 4: public class oldFile {
+Line 7: LineReader r = new LineReader();
+Line 9: while(line = lr.readLine()) {
+Line 14: int total = 0;
+Line 15: total = a + b;
+Line 16: return total;
+
+RIGHT LIST (Changed/Added Lines):
+----------------------------------
+Line 3: public class newFile {
+Line 4: // Changed the reader implementation
+Line 7: BufferedReader r = new BufferedReader(fr);
+Line 9: while(line = r.readLine()) {
+Line 12: fr.close();
+Line 14: // Modified calculation method
+Line 16: return a + b;
+Line 20: }
+Line 21: // New method added
+Line 22: public void printGreeting(String name) {
+Line 23: System.out.println("Hello " + name);
