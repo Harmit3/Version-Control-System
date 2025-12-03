@@ -1,5 +1,3 @@
-package step2;
-
 import java.io.*;
 
 import LineReader;
@@ -25,7 +23,7 @@ public class oldFile {
         System.out.println("Hello World");
     }
 
-    public void printgreeting(string name) {
-        System.out.println("hello " + name);
+    public void printg(string name) {
+        System.out.println("h " + name);
     }
 }
