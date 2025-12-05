@@ -1,0 +1,29 @@
+=== Complete LHDiff Results (Steps 1-5) ===
+
+SUMMARY:
+--------
+Old lines: 10
+New lines: 12
+Unchanged (Step 2): 4
+Resolved (Step 4): 2
+Line splits (Step 5): 1
+
+ALL MAPPINGS:
+-------------
+1 -> 1
+2 -> 2
+3 -> 3
+4 -> 4
+5 -> 5
+6 -> [6, 7, 8]
+7 -> 9
+
+LINE SPLITS:
+------------
+Old Line 6 -> [6, 7, 8] (similarity: 1.00)
+  OLD: if (x > 5 && y > 15 && (x + y) < 40) {
+  NEW:
+    Line 6: if (x > 5
+    Line 7: && y > 15
+    Line 8: && (x + y) < 40) {
+
