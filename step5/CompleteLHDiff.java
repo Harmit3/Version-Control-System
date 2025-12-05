@@ -46,36 +46,35 @@ public class CompleteLHDiff {
     }
     
     public void run() {
-        System.out.println("=== Complete LHDiff: Steps 1-5 ===\n");
         
         System.out.println("STEP 1: Preprocessing...");
         preprocessFiles();
-        System.out.println("✓ Complete\n");
+        System.out.println("Complete\n");
         
         System.out.println("STEP 2: Unix Diff (LCS)...");
         applyUnixDiff();
         filterBracketOnlyMappings();
-        System.out.println("✓ Complete");
+        System.out.println("Complete");
         System.out.println("  Unchanged: " + unchangedMapping.size());
         System.out.println("  Left List: " + leftList.size());
         System.out.println("  Right List: " + rightList.size() + "\n");
         
         System.out.println("STEP 3: Generating Candidates...");
         generateCandidates();
-        System.out.println("✓ Complete\n");
+        System.out.println("Complete\n");
         
         System.out.println("STEP 4: Resolving Conflicts...");
         resolveConflicts();
-        System.out.println("✓ Complete");
+        System.out.println("Complete");
         System.out.println("  Resolved matches: " + resolvedMapping.size() + "\n");
         
         System.out.println("STEP 5: Detecting Line Splits...");
         detectLineSplits();
-        System.out.println("✓ Complete");
+        System.out.println("Complete");
         System.out.println("  Line splits found: " + lineSplits.size() + "\n");
     }
     
-    // ==================== STEPS 1-4 ====================
+
     
     private void preprocessFiles() {
         oldLinesProcessed = new ArrayList<>();
@@ -241,9 +240,7 @@ public class CompleteLHDiff {
         }
     }
     
-    // ==================== STEP 5: FINAL FIXED LINE SPLIT DETECTION ====================
-    
-    /**
+    /*
      * Check ALL old lines (both mapped and unmapped)
      * Only use UNMAPPED new lines for splits
      * Replace existing mapping if split is significantly better
@@ -303,7 +300,7 @@ public class CompleteLHDiff {
         }
     }
     
-    /**
+    /*
      * Try combining consecutive lines starting from startIdx
      * Only uses lines that are NOT in unchangedMapping (Step 2 protected mappings)
      */
@@ -379,7 +376,6 @@ public class CompleteLHDiff {
         return maxLen == 0 ? 0.0 : (double) distance / maxLen;
     }
     
-    // ==================== SIMILARITY FUNCTIONS ====================
     
     private double calculateContentSimilarity(String s1, String s2) {
         return 1.0 - normalizedLevenshtein(s1, s2);
@@ -425,10 +421,9 @@ public class CompleteLHDiff {
         return trimmed.equals("}") || trimmed.equals("{");
     }
     
-    // ==================== OUTPUT ====================
     
     public void printResults() {
-        System.out.println("\n=== FINAL RESULTS ===\n");
+        System.out.println("\n FINAL RESULTS \n");
         
         System.out.println("LINE MAPPINGS:");
         System.out.println("-------------");
@@ -454,7 +449,7 @@ public class CompleteLHDiff {
         }
         
         if (!lineSplits.isEmpty()) {
-            System.out.println("\n=== LINE SPLITS DETAILS ===");
+            System.out.println("\n LINE SPLITS DETAILS ");
             List<Integer> sortedKeys = new ArrayList<>(lineSplits.keySet());
             Collections.sort(sortedKeys);
             
@@ -474,7 +469,7 @@ public class CompleteLHDiff {
     
     public void saveResults(String outputFile) throws IOException {
         try (PrintWriter writer = new PrintWriter(new FileWriter(outputFile))) {
-            writer.println("=== Complete LHDiff Results (Steps 1-5) ===");
+            writer.println("Complete LHDiff Results (Steps 1-5) ");
             writer.println();
             
             writer.println("SUMMARY:");
@@ -563,8 +558,6 @@ public class CompleteLHDiff {
     
     public static void main(String[] args) {
         if (args.length < 2) {
-            System.out.println("Complete LHDiff - All Steps 1-5");
-            System.out.println("Usage: java -cp \".;commons-text-1.10.0.jar;commons-lang3-3.12.0.jar;commons-collections4-4.4.jar\" CompleteLHDiff <oldFile> <newFile> [output]");
             return;
         }
         

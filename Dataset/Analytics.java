@@ -1,5 +1,5 @@
 import java.util.*;
-public class oldFile {
+public class Analytics {
     public void analyzeData(List<Integer> data) {
         int sum = 0;
         int max = Integer.MIN_VALUE;
@@ -27,7 +27,7 @@ public class oldFile {
     }
     public static void main(String[] args) {
         List<Integer> values = Arrays.asList(10, 20, 30, 40);
-        oldFile analytics = new oldFile();
+        Analytics analytics = new Analytics();
         analytics.analyzeData(values);
         analytics.reportData(values);
     }
