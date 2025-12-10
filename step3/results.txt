@@ -1,0 +1,302 @@
+=== LHDiff COMPLETE RESULTS ===
+
+STEP 2: UNCHANGED LINES
+------------------------
+Total: 12
+1 -> 1
+4 -> 4
+5 -> 5
+7 -> 7
+10 -> 10
+11 -> 12
+12 -> 14
+16 -> 16
+17 -> 17
+18 -> 18
+19 -> 19
+23 -> 23
+
+Left List: 11 lines
+Right List: 11 lines
+
+STEP 3: CANDIDATE LISTS
+------------------------
+K = 100
+Content Weight = 0.6
+Context Weight = 0.4
+
+Old Line 2: import LineReader;
+Candidates:
+  [1] New Line 3 - Combined: 0.4586 (Content: 0.1944, Context: 0.8548)
+      // Changed the reader implementation
+  [2] New Line 2 - Combined: 0.4423 (Content: 0.2273, Context: 0.7648)
+      public class newFile {
+  [3] New Line 8 - Combined: 0.4389 (Content: 0.2857, Context: 0.6688)
+      while(line = r.readLine()) {
+  [4] New Line 6 - Combined: 0.4371 (Content: 0.2619, Context: 0.6999)
+      BufferedReader r = new BufferedReader(fr);
+  [5] New Line 9 - Combined: 0.3853 (Content: 0.2941, Context: 0.5220)
+      System.out.println("line: "+line);
+  [6] New Line 22 - Combined: 0.2842 (Content: 0.2500, Context: 0.3356)
+      System.out.println("Hello " + name);
+  [7] New Line 11 - Combined: 0.2589 (Content: 0.2222, Context: 0.3139)
+      fr.close();
+  [8] New Line 21 - Combined: 0.2513 (Content: 0.2250, Context: 0.2907)
+      public void printGreeting(String name) {
+  [9] New Line 20 - Combined: 0.2260 (Content: 0.1579, Context: 0.3283)
+      // New method added
+  [10] New Line 13 - Combined: 0.2164 (Content: 0.1667, Context: 0.2909)
+      // Modified calculation method
+  [11] New Line 15 - Combined: 0.2164 (Content: 0.1667, Context: 0.2909)
+      return a + b;
+
+Old Line 3: public class oldFile {
+Candidates:
+  [1] New Line 2 - Combined: 0.8186 (Content: 0.8636, Context: 0.7511)
+      public class newFile {
+  [2] New Line 8 - Combined: 0.4485 (Content: 0.2500, Context: 0.7464)
+      while(line = r.readLine()) {
+  [3] New Line 3 - Combined: 0.4268 (Content: 0.1389, Context: 0.8585)
+      // Changed the reader implementation
+  [4] New Line 9 - Combined: 0.3492 (Content: 0.1471, Context: 0.6525)
+      System.out.println("line: "+line);
+  [5] New Line 6 - Combined: 0.3339 (Content: 0.1190, Context: 0.6561)
+      BufferedReader r = new BufferedReader(fr);
+  [6] New Line 21 - Combined: 0.2428 (Content: 0.2750, Context: 0.1946)
+      public void printGreeting(String name) {
+  [7] New Line 11 - Combined: 0.2231 (Content: 0.1364, Context: 0.3531)
+      fr.close();
+  [8] New Line 13 - Combined: 0.1606 (Content: 0.1667, Context: 0.1515)
+      // Modified calculation method
+  [9] New Line 22 - Combined: 0.1566 (Content: 0.1111, Context: 0.2247)
+      System.out.println("Hello " + name);
+  [10] New Line 20 - Combined: 0.1557 (Content: 0.1364, Context: 0.1846)
+      // New method added
+  [11] New Line 15 - Combined: 0.1424 (Content: 0.1364, Context: 0.1515)
+      return a + b;
+
+Old Line 6: LineReader r = new LineReader();
+Candidates:
+  [1] New Line 6 - Combined: 0.6896 (Content: 0.6190, Context: 0.7955)
+      BufferedReader r = new BufferedReader(fr);
+  [2] New Line 8 - Combined: 0.4583 (Content: 0.2813, Context: 0.7239)
+      while(line = r.readLine()) {
+  [3] New Line 3 - Combined: 0.4339 (Content: 0.1944, Context: 0.7931)
+      // Changed the reader implementation
+  [4] New Line 9 - Combined: 0.3766 (Content: 0.2353, Context: 0.5886)
+      System.out.println("line: "+line);
+  [5] New Line 2 - Combined: 0.3490 (Content: 0.1875, Context: 0.5913)
+      public class newFile {
+  [6] New Line 11 - Combined: 0.3266 (Content: 0.1875, Context: 0.5351)
+      fr.close();
+  [7] New Line 20 - Combined: 0.2937 (Content: 0.1875, Context: 0.4531)
+      // New method added
+  [8] New Line 21 - Combined: 0.2833 (Content: 0.2250, Context: 0.3708)
+      public void printGreeting(String name) {
+  [9] New Line 15 - Combined: 0.2782 (Content: 0.2188, Context: 0.3674)
+      return a + b;
+  [10] New Line 22 - Combined: 0.2401 (Content: 0.1667, Context: 0.3503)
+      System.out.println("Hello " + name);
+  [11] New Line 13 - Combined: 0.2242 (Content: 0.0938, Context: 0.4199)
+      // Modified calculation method
+
+Old Line 8: while (line = lr.readLine()) {
+Candidates:
+  [1] New Line 8 - Combined: 0.8768 (Content: 0.9333, Context: 0.7921)
+      while(line = r.readLine()) {
+  [2] New Line 6 - Combined: 0.4158 (Content: 0.2143, Context: 0.7181)
+      BufferedReader r = new BufferedReader(fr);
+  [3] New Line 2 - Combined: 0.3978 (Content: 0.2667, Context: 0.5944)
+      public class newFile {
+  [4] New Line 3 - Combined: 0.3942 (Content: 0.1667, Context: 0.7356)
+      // Changed the reader implementation
+  [5] New Line 11 - Combined: 0.3933 (Content: 0.2000, Context: 0.6831)
+      fr.close();
+  [6] New Line 9 - Combined: 0.3674 (Content: 0.1765, Context: 0.6537)
+      System.out.println("line: "+line);
+  [7] New Line 13 - Combined: 0.3212 (Content: 0.1333, Context: 0.6030)
+      // Modified calculation method
+  [8] New Line 21 - Combined: 0.3178 (Content: 0.2500, Context: 0.4196)
+      public void printGreeting(String name) {
+  [9] New Line 20 - Combined: 0.3037 (Content: 0.2000, Context: 0.4593)
+      // New method added
+  [10] New Line 15 - Combined: 0.3011 (Content: 0.1333, Context: 0.5528)
+      return a + b;
+  [11] New Line 22 - Combined: 0.2306 (Content: 0.1111, Context: 0.4099)
+      System.out.println("Hello " + name);
+
+Old Line 9: System.out.println("line: " + line);
+Candidates:
+  [1] New Line 9 - Combined: 0.8556 (Content: 0.9444, Context: 0.7223)
+      System.out.println("line: "+line);
+  [2] New Line 22 - Combined: 0.5829 (Content: 0.7778, Context: 0.2905)
+      System.out.println("Hello " + name);
+  [3] New Line 8 - Combined: 0.3996 (Content: 0.1944, Context: 0.7074)
+      while(line = r.readLine()) {
+  [4] New Line 11 - Combined: 0.3453 (Content: 0.1389, Context: 0.6550)
+      fr.close();
+  [5] New Line 6 - Combined: 0.3345 (Content: 0.1429, Context: 0.6219)
+      BufferedReader r = new BufferedReader(fr);
+  [6] New Line 15 - Combined: 0.3328 (Content: 0.2500, Context: 0.4570)
+      return a + b;
+  [7] New Line 2 - Combined: 0.3059 (Content: 0.1667, Context: 0.5148)
+      public class newFile {
+  [8] New Line 3 - Combined: 0.2797 (Content: 0.0278, Context: 0.6576)
+      // Changed the reader implementation
+  [9] New Line 13 - Combined: 0.2661 (Content: 0.1389, Context: 0.4570)
+      // Modified calculation method
+  [10] New Line 21 - Combined: 0.2656 (Content: 0.2750, Context: 0.2516)
+      public void printGreeting(String name) {
+  [11] New Line 20 - Combined: 0.1727 (Content: 0.1111, Context: 0.2652)
+      // New method added
+
+Old Line 13: int total = 0;
+Candidates:
+  [1] New Line 15 - Combined: 0.5042 (Content: 0.3571, Context: 0.7247)
+      return a + b;
+  [2] New Line 13 - Combined: 0.4368 (Content: 0.1333, Context: 0.8920)
+      // Modified calculation method
+  [3] New Line 20 - Combined: 0.3867 (Content: 0.2105, Context: 0.6511)
+      // New method added
+  [4] New Line 11 - Combined: 0.3780 (Content: 0.1429, Context: 0.7308)
+      fr.close();
+  [5] New Line 21 - Combined: 0.3048 (Content: 0.1500, Context: 0.5371)
+      public void printGreeting(String name) {
+  [6] New Line 22 - Combined: 0.2986 (Content: 0.1944, Context: 0.4548)
+      System.out.println("Hello " + name);
+  [7] New Line 8 - Combined: 0.2719 (Content: 0.1786, Context: 0.4119)
+      while(line = r.readLine()) {
+  [8] New Line 6 - Combined: 0.2452 (Content: 0.1190, Context: 0.4345)
+      BufferedReader r = new BufferedReader(fr);
+  [9] New Line 9 - Combined: 0.2259 (Content: 0.1765, Context: 0.3001)
+      System.out.println("line: "+line);
+  [10] New Line 3 - Combined: 0.2097 (Content: 0.1389, Context: 0.3159)
+      // Changed the reader implementation
+  [11] New Line 2 - Combined: 0.1425 (Content: 0.0909, Context: 0.2198)
+      public class newFile {
+
+Old Line 14: total = a + b;
+Candidates:
+  [1] New Line 15 - Combined: 0.6817 (Content: 0.5714, Context: 0.8472)
+      return a + b;
+  [2] New Line 13 - Combined: 0.4276 (Content: 0.1667, Context: 0.8189)
+      // Modified calculation method
+  [3] New Line 22 - Combined: 0.3678 (Content: 0.2500, Context: 0.5445)
+      System.out.println("Hello " + name);
+  [4] New Line 11 - Combined: 0.3490 (Content: 0.1429, Context: 0.6581)
+      fr.close();
+  [5] New Line 20 - Combined: 0.3270 (Content: 0.1053, Context: 0.6596)
+      // New method added
+  [6] New Line 21 - Combined: 0.2776 (Content: 0.1000, Context: 0.5441)
+      public void printGreeting(String name) {
+  [7] New Line 6 - Combined: 0.2663 (Content: 0.1667, Context: 0.4157)
+      BufferedReader r = new BufferedReader(fr);
+  [8] New Line 8 - Combined: 0.2629 (Content: 0.1786, Context: 0.3895)
+      while(line = r.readLine()) {
+  [9] New Line 9 - Combined: 0.2451 (Content: 0.2059, Context: 0.3040)
+      System.out.println("line: "+line);
+  [10] New Line 3 - Combined: 0.2113 (Content: 0.1389, Context: 0.3200)
+      // Changed the reader implementation
+  [11] New Line 2 - Combined: 0.1709 (Content: 0.1364, Context: 0.2227)
+      public class newFile {
+
+Old Line 15: return total;
+Candidates:
+  [1] New Line 15 - Combined: 0.6806 (Content: 0.6154, Context: 0.7785)
+      return a + b;
+  [2] New Line 13 - Combined: 0.4218 (Content: 0.1667, Context: 0.8044)
+      // Modified calculation method
+  [3] New Line 20 - Combined: 0.3793 (Content: 0.2105, Context: 0.6325)
+      // New method added
+  [4] New Line 11 - Combined: 0.3745 (Content: 0.1538, Context: 0.7055)
+      fr.close();
+  [5] New Line 22 - Combined: 0.3168 (Content: 0.1944, Context: 0.5004)
+      System.out.println("Hello " + name);
+  [6] New Line 21 - Combined: 0.3033 (Content: 0.1500, Context: 0.5333)
+      public void printGreeting(String name) {
+  [7] New Line 8 - Combined: 0.2810 (Content: 0.1786, Context: 0.4346)
+      while(line = r.readLine()) {
+  [8] New Line 6 - Combined: 0.2798 (Content: 0.1667, Context: 0.4495)
+      BufferedReader r = new BufferedReader(fr);
+  [9] New Line 9 - Combined: 0.2549 (Content: 0.1765, Context: 0.3725)
+      System.out.println("line: "+line);
+  [10] New Line 3 - Combined: 0.2470 (Content: 0.1667, Context: 0.3676)
+      // Changed the reader implementation
+  [11] New Line 2 - Combined: 0.1598 (Content: 0.0909, Context: 0.2631)
+      public class newFile {
+
+Old Line 20: public void printg(string name) {
+Candidates:
+  [1] New Line 21 - Combined: 0.8107 (Content: 0.8250, Context: 0.7894)
+      public void printGreeting(String name) {
+  [2] New Line 22 - Combined: 0.4466 (Content: 0.3056, Context: 0.6583)
+      System.out.println("Hello " + name);
+  [3] New Line 20 - Combined: 0.4376 (Content: 0.1515, Context: 0.8667)
+      // New method added
+  [4] New Line 15 - Combined: 0.3822 (Content: 0.1818, Context: 0.6828)
+      return a + b;
+  [5] New Line 13 - Combined: 0.3686 (Content: 0.1818, Context: 0.6486)
+      // Modified calculation method
+  [6] New Line 8 - Combined: 0.2753 (Content: 0.2121, Context: 0.3700)
+      while(line = r.readLine()) {
+  [7] New Line 9 - Combined: 0.2691 (Content: 0.2647, Context: 0.2757)
+      System.out.println("line: "+line);
+  [8] New Line 2 - Combined: 0.2643 (Content: 0.3636, Context: 0.1154)
+      public class newFile {
+  [9] New Line 11 - Combined: 0.2318 (Content: 0.1212, Context: 0.3978)
+      fr.close();
+  [10] New Line 6 - Combined: 0.2040 (Content: 0.1429, Context: 0.2957)
+      BufferedReader r = new BufferedReader(fr);
+  [11] New Line 3 - Combined: 0.1311 (Content: 0.1111, Context: 0.1612)
+      // Changed the reader implementation
+
+Old Line 21: System.out.println("h " + name);
+Candidates:
+  [1] New Line 22 - Combined: 0.8372 (Content: 0.8889, Context: 0.7596)
+      System.out.println("Hello " + name);
+  [2] New Line 9 - Combined: 0.5215 (Content: 0.7059, Context: 0.2450)
+      System.out.println("line: "+line);
+  [3] New Line 21 - Combined: 0.4907 (Content: 0.3500, Context: 0.7016)
+      public void printGreeting(String name) {
+  [4] New Line 15 - Combined: 0.4692 (Content: 0.2813, Context: 0.7511)
+      return a + b;
+  [5] New Line 20 - Combined: 0.4543 (Content: 0.1563, Context: 0.9014)
+      // New method added
+  [6] New Line 13 - Combined: 0.3294 (Content: 0.0938, Context: 0.6828)
+      // Modified calculation method
+  [7] New Line 6 - Combined: 0.2774 (Content: 0.1667, Context: 0.4435)
+      BufferedReader r = new BufferedReader(fr);
+  [8] New Line 11 - Combined: 0.2341 (Content: 0.1250, Context: 0.3978)
+      fr.close();
+  [9] New Line 8 - Combined: 0.2177 (Content: 0.0938, Context: 0.4036)
+      while(line = r.readLine()) {
+  [10] New Line 3 - Combined: 0.1956 (Content: 0.1111, Context: 0.3224)
+      // Changed the reader implementation
+  [11] New Line 2 - Combined: 0.1673 (Content: 0.1250, Context: 0.2308)
+      public class newFile {
+
+Old Line 22: }
+Candidates:
+  [1] New Line 20 - Combined: 0.3469 (Content: 0.0000, Context: 0.8672)
+      // New method added
+  [2] New Line 21 - Combined: 0.3002 (Content: 0.0000, Context: 0.7506)
+      public void printGreeting(String name) {
+  [3] New Line 22 - Combined: 0.2667 (Content: 0.0000, Context: 0.6667)
+      System.out.println("Hello " + name);
+  [4] New Line 15 - Combined: 0.2337 (Content: 0.0000, Context: 0.5843)
+      return a + b;
+  [5] New Line 13 - Combined: 0.2157 (Content: 0.0000, Context: 0.5394)
+      // Modified calculation method
+  [6] New Line 11 - Combined: 0.1397 (Content: 0.0000, Context: 0.3491)
+      fr.close();
+  [7] New Line 6 - Combined: 0.1246 (Content: 0.0000, Context: 0.3114)
+      BufferedReader r = new BufferedReader(fr);
+  [8] New Line 8 - Combined: 0.1240 (Content: 0.0000, Context: 0.3100)
+      while(line = r.readLine()) {
+  [9] New Line 3 - Combined: 0.0849 (Content: 0.0000, Context: 0.2122)
+      // Changed the reader implementation
+  [10] New Line 9 - Combined: 0.0806 (Content: 0.0000, Context: 0.2016)
+      System.out.println("line: "+line);
+  [11] New Line 2 - Combined: 0.0608 (Content: 0.0000, Context: 0.1519)
+      public class newFile {
+
