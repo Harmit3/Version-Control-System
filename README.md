@@ -6,24 +6,6 @@
 
 A sophisticated line mapping tool that tracks how lines of code evolve between different versions of files. Based on the LHDiff methodology, this implementation combines multiple similarity metrics to achieve accurate line tracking across various code change scenarios.
 
-## 📋 Table of Contents
-
-- [Overview](#overview)
-- [Features](#features)
-- [Algorithm](#algorithm)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Dataset Structure](#dataset-structure)
-- [Output Format](#output-format)
-- [Evaluation](#evaluation)
-- [Project Structure](#project-structure)
-- [Dependencies](#dependencies)
-- [Examples](#examples)
-- [Limitations](#limitations)
-- [Contributing](#contributing)
-- [Authors](#authors)
-- [References](#references)
-
 ## 🎯 Overview
 
 LHDiff is a research implementation of a line tracking algorithm designed for software engineering tasks such as:
@@ -34,335 +16,54 @@ LHDiff is a research implementation of a line tracking algorithm designed for so
 - **Refactoring Analysis**: Tracking line movements during restructuring
 - **Change Impact Analysis**: Measuring the extent of modifications
 
-### Real-World Use Cases
 
-#### 1. 🐛 Bug Introduction Detection
-**Scenario**: A bug appeared after recent changes, but you're not sure which commit introduced it.
+## 📦 Setup Instructions
 
-**How LHDiff Helps**:
+### Step 1: Download Required Libraries
+
+You need 3 JAR files in the `lib/` folder. Click these links to download:
+
+1. [commons-text-1.10.0.jar](https://repo1.maven.org/maven2/org/apache/commons/commons-text/1.10.0/commons-text-1.10.0.jar)
+2. [commons-lang3-3.12.0.jar](https://repo1.maven.org/maven2/org/apache/commons/commons-lang3/3.12.0/commons-lang3-3.12.0.jar)
+3. [commons-collections4-4.4.jar](https://repo1.maven.org/maven2/org/apache/commons/commons-collections4/4.4/commons-collections4-4.4.jar)
+
+**Place all 3 JARs in the `lib/` folder.**
+
+### Step 2: Verify Folder Structure
+
 ```
-Step 1: Compare working version (old) vs buggy version (new)
-Step 2: Identify which lines were modified
-Step 3: Focus code review on changed lines
-Result: Quickly locate the bug-introducing change
-```
-
-**Example**:
-```
-Old Line 45: if (value > 0) return true;
-New Line 48: if (value >= 0) return true;  // Bug: changed > to >=
-Mapping: 45 -> 48 (Modified - potential bug source!)
-```
-
-#### 2. 📊 Code Review Efficiency
-**Scenario**: Reviewing a pull request with 500 lines changed across multiple files.
-
-**How LHDiff Helps**:
-- Automatically identifies truly modified lines vs moved/reformatted lines
-- Separates line splits (formatting) from logic changes
-- Shows deleted functionality clearly
-- Reduces review time by 60%
-
-**Example**:
-```
-Developer reformatted a long method signature:
-Old: public void processData(String name, int age, String address) {
-New: public void processData(
-       String name,
-       int age,
-       String address) {
-
-LHDiff Output: 1 -> [1, 2, 3, 4] (Split - formatting only, skip review)
+VCS-project/
+├── lib/
+│   ├── commons-text-1.10.0.jar          ✓ Downloaded
+│   ├── commons-lang3-3.12.0.jar         ✓ Downloaded
+│   └── commons-collections4-4.4.jar     ✓ Downloaded
+├── Code/
+│   └── CompleteLHDiff.java
+├── automation_algo/
+│   └── DatasetProcessor.java
+└── Dataset/
+    ├── prog1.java
+    ├── prog1new.java
+    └── ...
 ```
 
-#### 3. 🔄 Refactoring Verification
-**Scenario**: You refactored code to improve readability. Need to verify no logic changed.
+### Step 3: Compile the Code
 
-**How LHDiff Helps**:
-```
-Step 1: Run LHDiff on pre-refactor vs post-refactor
-Step 2: Check mapping results
-Step 3: Verify all changes are "unchanged" or "split" only
-Result: Confidence that refactoring preserved behavior
+**Windows:**
+```bash
+cd Code
+javac -cp ".;../lib/*" CompleteLHDiff.java
 ```
 
-**Example**:
-```
-✅ Safe Changes:
-  - Lines 1-10 -> 1-10 (Unchanged)
-  - Line 11 -> [11, 12, 13] (Split only)
-  
-⚠️ Unexpected Changes:
-  - Line 15 -> 20 (Modified - review needed!)
+**Linux/Mac:**
+```bash
+cd Code
+javac -cp ".:../lib/*" CompleteLHDiff.java
 ```
 
-#### 4. 📈 Software Evolution Analysis
-**Scenario**: Analyzing how a codebase evolved over 6 months.
+## 🚀 Running the Code
 
-**How LHDiff Helps**:
-- Track which functions changed most frequently
-- Identify code hotspots (high churn areas)
-- Measure code stability
-- Plan testing priorities
-
-**Example Statistics**:
-```
-File: DatabaseHandler.java
-- 120 total lines
-- 45 unchanged (37.5%) - Stable code
-- 60 modified (50%) - Active development
-- 15 deleted (12.5%) - Removed features
-```
-
-#### 5. 🔀 Merge Conflict Resolution
-**Scenario**: Two developers modified the same file in different branches.
-
-**How LHDiff Helps**:
-```
-Compare: Branch A vs Branch B vs Main
-Step 1: Use LHDiff to see what each developer changed
-Step 2: Identify overlapping changes
-Step 3: Merge non-conflicting changes automatically
-Result: Faster, more accurate merge resolution
-```
-
-#### 6. 📝 Documentation Updates
-**Scenario**: Code comments need updating after implementation changes.
-
-**How LHDiff Helps**:
-- Maps old comments to new code locations
-- Identifies orphaned comments (deleted code)
-- Shows which documented functions changed
-- Highlights documentation gaps
-
-**Example**:
-```
-Old Line 25: // Validates user input (comment)
-Old Line 26: validateInput(data);
-
-New: Line 26 -> -1 (deleted)
-Result: Comment on line 25 is now orphaned - needs removal
-```
-
-#### 7. 🧪 Test Case Maintenance
-**Scenario**: Production code changed; test cases need updating.
-
-**How LHDiff Helps**:
-```
-Step 1: Map changed production lines
-Step 2: Identify affected test cases
-Step 3: Update/add tests for modified functionality
-Result: Maintain test coverage automatically
-```
-
-#### 8. 🎓 Code Learning & Onboarding
-**Scenario**: New developer needs to understand recent changes.
-
-**How LHDiff Helps**:
-- Visual side-by-side comparison
-- Clear mapping of what changed
-- Identifies deleted/added functionality
-- Shows code evolution patterns
-
-**Example Training Session**:
-```
-"Here's how the authentication system evolved:
-- Lines 10-15 were split for readability (no logic change)
-- Line 20 -> 25: Password validation strengthened
-- Lines 30-35 -> -1: Removed deprecated OAuth 1.0 support
-- Lines 40-45: New (added OAuth 2.0 implementation)"
-```
-
-#### 9. 🔐 Security Audit
-**Scenario**: Auditing code changes for security vulnerabilities.
-
-**How LHDiff Helps**:
-```
-Focus Areas:
-✓ Lines handling user input (mapped changes)
-✓ Authentication/authorization logic (modifications)
-✓ Database queries (deletions/additions)
-✓ File operations (context changes)
-
-Result: Systematic security review of actual changes
-```
-
-#### 10. 📊 Project Management Insights
-**Scenario**: Manager needs to understand team productivity.
-
-**How LHDiff Helps**:
-- Measure actual code changes (not just line count)
-- Distinguish formatting from logic changes
-- Track code churn rate
-- Identify problematic areas
-
-**Metrics Example**:
-```
-Sprint Report:
-- 1,200 lines changed
-  └─ 300 logic changes (actual work)
-  └─ 700 formatting/splits (IDE auto-format)
-  └─ 200 moved lines (refactoring)
-
-Actual productive changes: 300 lines
-```
-
-### Key Capabilities
-
-- ✅ Detects unchanged lines with 100% accuracy
-- ✅ Identifies modified lines using content and context similarity
-- ✅ Recognizes line splits (one line → multiple lines)
-- ✅ Handles code reordering effectively
-- ✅ Language-independent approach (works with any text-based code)
-- ✅ Achieves 95.6% accuracy on test dataset
-- ✅ Batch processing for multiple files
-- ✅ Detailed reporting with visual output
-
-## ✨ Features
-
-### Core Functionality
-
-1. **Preprocessing**: Normalizes code by removing formatting inconsistencies
-2. **LCS Matching**: Uses Longest Common Subsequence for exact matches
-3. **Similarity Analysis**: Combines Levenshtein distance and Cosine similarity
-4. **Conflict Resolution**: Intelligently handles competing matches
-5. **Split Detection**: Identifies when lines are broken across multiple lines
-
-### Advanced Features
-
-- **Batch Processing**: Automatically processes multiple file pairs
-- **Detailed Reporting**: Generates comprehensive mapping results
-- **Configurable Thresholds**: Adjustable similarity thresholds
-- **Performance Optimization**: Efficient candidate pruning
-- **Bracket Filtering**: Ignores semantically meaningless brackets
-
-## 🔬 Algorithm
-
-### Five-Step Process
-
-#### Step 1: Preprocessing
-```
-Input: oldFile.java, newFile.java
-→ Normalize whitespace
-→ Convert to lowercase
-→ Remove formatting artifacts
-Output: Normalized line arrays
-```
-
-#### Step 2: LCS Matching
-```
-Algorithm: Longest Common Subsequence
-→ Identifies perfectly matching lines
-→ Filters bracket-only matches
-→ Establishes baseline mappings
-Confidence: 100%
-```
-
-#### Step 3: Candidate Generation
-```
-For each unmatched line:
-  ContentSim = 1 - (EditDistance / MaxLength)
-  ContextSim = Cosine(WordVectors)
-  CombinedScore = 0.6 × ContentSim + 0.4 × ContextSim
-  Keep top 15 candidates
-```
-
-#### Step 4: Conflict Resolution
-```
-For competing matches:
-  → Recalculate exact similarities
-  → Apply threshold (default: 0.5)
-  → Assign to highest scoring pair
-  → Remove inferior matches
-```
-
-#### Step 5: Line Split Detection
-```
-For each old line:
-  Try combining consecutive new lines
-  While similarity improves:
-    → Add next line to combination
-  Accept if similarity ≥ 0.6 and ≥ 2 lines
-```
-
-## 📦 Installation
-
-### Prerequisites
-
-- **Java Development Kit (JDK)**: Version 8 or higher
-- **Apache Commons Libraries**: (included in `lib/` folder)
-  - commons-text-1.10.0.jar
-  - commons-lang3-3.12.0.jar
-  - commons-collections4-4.4.jar
-
-### Setup Instructions
-
-1. **Clone or Download the Project**
-   ```bash
-   git clone <repository-url>
-   cd VCS-project
-   ```
-
-2. **Download Required Libraries**
-
-   Download all three JAR files and place them in the `lib/` folder:
-
-   **Option A: Direct Download (Recommended)**
-   - [commons-text-1.10.0.jar](https://repo1.maven.org/maven2/org/apache/commons/commons-text/1.10.0/commons-text-1.10.0.jar)
-   - [commons-lang3-3.12.0.jar](https://repo1.maven.org/maven2/org/apache/commons/commons-lang3/3.12.0/commons-lang3-3.12.0.jar)
-   - [commons-collections4-4.4.jar](https://repo1.maven.org/maven2/org/apache/commons/commons-collections4/4.4/commons-collections4-4.4.jar)
-
-   **Option B: Command Line**
-   ```bash
-   cd lib
-   
-   # Windows (PowerShell)
-   Invoke-WebRequest -Uri "https://repo1.maven.org/maven2/org/apache/commons/commons-text/1.10.0/commons-text-1.10.0.jar" -OutFile "commons-text-1.10.0.jar"
-   Invoke-WebRequest -Uri "https://repo1.maven.org/maven2/org/apache/commons/commons-lang3/3.12.0/commons-lang3-3.12.0.jar" -OutFile "commons-lang3-3.12.0.jar"
-   Invoke-WebRequest -Uri "https://repo1.maven.org/maven2/org/apache/commons/commons-collections4/4.4/commons-collections4-4.4.jar" -OutFile "commons-collections4-4.4.jar"
-   
-   # Linux/Mac
-   wget https://repo1.maven.org/maven2/org/apache/commons/commons-text/1.10.0/commons-text-1.10.0.jar
-   wget https://repo1.maven.org/maven2/org/apache/commons/commons-lang3/3.12.0/commons-lang3-3.12.0.jar
-   wget https://repo1.maven.org/maven2/org/apache/commons/commons-collections4/4.4/commons-collections4-4.4.jar
-   ```
-
-3. **Verify Folder Structure**
-   ```
-   VCS-project/
-   ├── lib/                    # JAR dependencies (download these!)
-   │   ├── commons-text-1.10.0.jar
-   │   ├── commons-lang3-3.12.0.jar
-   │   └── commons-collections4-4.4.jar
-   ├── Code/                   # Main algorithm
-   │   └── CompleteLHDiff.java
-   ├── automation_algo/        # Batch processor (optional)
-   │   └── DatasetProcessor.java
-   └── Dataset/                # Input files
-       ├── prog1.java
-       ├── prog1new.java
-       └── ...
-   ```
-
-4. **Compile the Project**
-   
-   **Windows:**
-   ```bash
-   cd Code
-   javac -cp ".;../lib/*" CompleteLHDiff.java
-   ```
-   
-   **Linux/Mac:**
-   ```bash
-   cd Code
-   javac -cp ".:../lib/*" CompleteLHDiff.java
-   ```
-
-## 🚀 Usage
-
-### Single File Comparison
-
-Compare two individual files:
+### Option 1: Compare Two Files
 
 **Windows:**
 ```bash
@@ -374,325 +75,10 @@ java -cp ".;../lib/*" CompleteLHDiff oldFile.java newFile.java output.txt
 java -cp ".:../lib/*" CompleteLHDiff oldFile.java newFile.java output.txt
 ```
 
-### Batch Processing
-
-Process all file pairs in the Dataset folder:
-
-1. **Prepare Dataset**
-   ```
-   Dataset/
-   ├── prog1.java       (old version)
-   ├── prog1new.java    (new version)
-   ├── prog2.java
-   ├── prog2new.java
-   └── ...
-   ```
-
-2. **Run Batch Processor**
-   ```bash
-   cd automation_algo
-   java -cp ".;../lib/*;../Code" DatasetProcessor
-   ```
-
-3. **Results Generated**
-   ```
-   Dataset/
-   ├── prog1.txt        (results)
-   ├── prog2.txt
-   └── ...
-   ```
-
-## 📁 Dataset Structure
-
-### File Naming Convention
-
-- **Old Files**: `prog1.java`, `prog2.java`, `prog3.java`, ...
-- **New Files**: `prog1new.java`, `prog2new.java`, `prog3new.java`, ...
-- **Results**: `prog1.txt`, `prog2.txt`, `prog3.txt`, ...
-
-The batch processor automatically matches pairs and generates results.
-
-### Example Dataset Entry
-
-**prog1.java** (Old Version):
-```java
-public class Example {
-    int x = 5;
-    if (x > 5 && y > 10 && z < 20) {
-        System.out.println("Condition met");
-    }
-}
-```
-
-**prog1new.java** (New Version):
-```java
-public class Example {
-    int x = 5;
-    if (x > 5
-        && y > 10
-        && z < 20) {
-        System.out.println("Condition met");
-    }
-}
-```
-
-## 📊 Output Format
-
-### Simple Mapping Format
-
-```
-=== LHDiff Results for prog1 ===
-
-Line Mappings:
---------------
-1 -> 1
-2 -> 2
-3 -> [3, 4, 5]    # Line split detected
-4 -> 6
-5 -> -1           # Deleted line
-6 -> 7
-```
-
-### Detailed Format (with CompleteLHDiff)
-
-```
-=== FINAL RESULTS ===
-
-LINE MAPPINGS:
--------------
-1 -> 1
-2 -> 2
-3 -> [3, 4, 5]
-4 -> 6
-5 -> -1
-
-=== LINE SPLITS DETAILS ===
-
-Old Line 3 SPLIT into 3 lines (similarity: 0.99):
-  OLD: if (x > 5 && y > 10 && z < 20) {
-  NEW:
-    Line 3: if (x > 5
-    Line 4:     && y > 10
-    Line 5:     && z < 20) {
-```
-
-### Mapping Notation
-
-| Notation | Meaning | Example |
-|----------|---------|---------|
-| `N -> M` | Line N maps to line M | `5 -> 7` |
-| `N -> [M1, M2, ...]` | Line N split into multiple lines | `3 -> [3, 4, 5]` |
-| `N -> -1` | Line N was deleted | `9 -> -1` |
-
-## 📈 Evaluation
-
-### Performance Metrics
-
-| Metric | Score |
-|--------|-------|
-| **Overall Accuracy** | **95.6%** |
-| Correct Mappings | 478/500 |
-| Incorrect Mappings | 14/500 (2.8%) |
-| Missed Mappings | 8/500 (1.6%) |
-
-### Accuracy by Change Type
-
-| Change Type | Accuracy |
-|-------------|----------|
-| Unchanged Lines | 100% |
-| Modified Lines | 95.5% |
-| Line Splits | 90.5% |
-| Reordered Lines | 94.3% |
-| Deleted Lines | 82.5% |
-
-### Comparison with Unix Diff
-
-- **Unix Diff**: 68% accuracy
-- **LHDiff**: 95.6% accuracy
-- **Improvement**: +27.6%
-
-## 🗂️ Project Structure
-
-```
-VCS-project/
-│
-├── README.md                          # This file
-├── lib/                               # Dependencies (DOWNLOAD THESE!)
-│   ├── commons-text-1.10.0.jar       # Download from Maven Central
-│   ├── commons-lang3-3.12.0.jar      # Download from Maven Central
-│   └── commons-collections4-4.4.jar  # Download from Maven Central
-│
-├── Code/                              # Main implementation
-│   └── CompleteLHDiff.java           # Core algorithm
-│
-├── automation_algo/                   # Batch processing
-│   └── DatasetProcessor.java         # Automated runner
-│
-├── Dataset/                           # Input/Output
-│   ├── prog1.java                    # Old files
-│   ├── prog1new.java                 # New files
-│   ├── prog1.txt                     # Results
-│   └── ...
-│
-└── docs/                              # Documentation (optional)
-    ├── algorithm.md
-    └── examples.md
-```
-
-## 📚 Dependencies
-
-### Required Libraries
-
-1. **Apache Commons Text** (v1.10.0)
-   - Provides Levenshtein distance calculation
-   - Download: [Maven Central](https://repo1.maven.org/maven2/org/apache/commons/commons-text/1.10.0/)
-
-2. **Apache Commons Lang3** (v3.12.0)
-   - Utility functions and helpers
-   - Download: [Maven Central](https://repo1.maven.org/maven2/org/apache/commons/commons-lang3/3.12.0/)
-
-3. **Apache Commons Collections4** (v4.4)
-   - Efficient data structures
-   - Download: [Maven Central](https://repo1.maven.org/maven2/org/apache/commons/commons-collections4/4.4/)
-
-### Quick Download
-
+**Example:**
 ```bash
-# Using wget
-wget https://repo1.maven.org/maven2/org/apache/commons/commons-text/1.10.0/commons-text-1.10.0.jar
-wget https://repo1.maven.org/maven2/org/apache/commons/commons-lang3/3.12.0/commons-lang3-3.12.0.jar
-wget https://repo1.maven.org/maven2/org/apache/commons/commons-collections4/4.4/commons-collections4-4.4.jar
-
-# Move to lib folder
-mv *.jar lib/
+java -cp ".;../lib/*" CompleteLHDiff ../Dataset/prog1.java ../Dataset/prog1new.java result.txt
 ```
-
-## 💡 Examples
-
-### Example 1: Simple Variable Rename
-
-**Old:**
-```java
-int oldName = 10;
-```
-
-**New:**
-```java
-int newName = 10;
-```
-
-**Mapping:** `1 -> 1` (Modified but matched)
-
----
-
-### Example 2: Line Split
-
-**Old:**
-```java
-public void method(int param1, int param2, int param3) {
-```
-
-**New:**
-```java
-public void method(
-    int param1, 
-    int param2, 
-    int param3) {
-```
-
-**Mapping:** `1 -> [1, 2, 3, 4]` (Split detected)
-
----
-
-### Example 3: Code Deletion
-
-**Old:**
-```java
-int x = 5;
-int y = 10;  // This line gets deleted
-int z = 15;
-```
-
-**New:**
-```java
-int x = 5;
-int z = 15;
-```
-
-**Mapping:**
-```
-1 -> 1
-2 -> -1  (Deleted)
-3 -> 2
-```
-
----
-
-### Example 4: Code Reordering
-
-**Old:**
-```java
-methodA();
-methodB();
-```
-
-**New:**
-```java
-methodB();
-methodA();
-```
-
-**Mapping:**
-```
-1 -> 2  (Reordered)
-2 -> 1  (Reordered)
-```
-
-## ⚠️ Limitations
-
-### Known Issues
-
-1. **Repetitive Code Patterns**
-   - Multiple similar variable declarations may confuse the matcher
-   - Example: `int a = 0; int b = 0; int c = 0;`
-
-2. **Extreme Refactoring**
-   - Complete code restructuring may lose semantic correspondence
-   - Requires sufficient syntactic similarity
-
-3. **Very Short Lines**
-   - Single-keyword statements provide minimal matching information
-   - Example: `return;`, `break;`, `continue;`
-
-4. **Context Changes**
-   - Lines moved to drastically different contexts may be missed
-   - Context similarity relies on surrounding code
-
-### Workarounds
-
-- **Use meaningful variable names** to improve content similarity
-- **Avoid extreme refactoring** in single commits
-- **Add comments** to provide additional context
-- **Keep formatting consistent** between versions
-
-## 🤝 Contributing
-
-While this is an academic project, we welcome suggestions and improvements.
-
-### How to Contribute
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/improvement`)
-3. Commit your changes (`git commit -am 'Add new feature'`)
-4. Push to the branch (`git push origin feature/improvement`)
-5. Open a Pull Request
-
-### Code Standards
-
-- Follow Java naming conventions
-- Add comments for complex logic
-- Include test cases for new features
-- Update documentation
 
 ## 👥 Authors
 
@@ -714,3 +100,4 @@ While this is an academic project, we welcome suggestions and improvements.
 ---
 
 Made with ❤️ by HKP labs!
+
